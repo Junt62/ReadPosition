@@ -19,7 +19,7 @@ namespace ReadPosition {
 
         public void Form1_Shown(object sender, EventArgs e) {
             string path = Program.CommandLineArgs;
-            //path = "C:\\Users\\Administrator\\Downloads\\a.txt";
+            path = "C:\\Users\\Administrator\\Downloads\\top1000.txt";
             string pathDirectory = Path.GetDirectoryName(path);
 
             if (path != null) {
@@ -34,23 +34,29 @@ namespace ReadPosition {
             string pattern = "<Entry Path=\"([^\"]*)\"[^>]*ofsx=\"([^\"]*)\"[^>]*ofsy=\"([^\"]*)\"[^>]*>";
             List<EntryData> extractedData = ExtractDataFromFile(path, pattern);
             if (extractedData != null) {
-                foreach (EntryData data in extractedData) {
-                    string fileNameWithoutExt = Path.GetFileNameWithoutExtension(data.Path);
-                    string fileName = Path.Combine("Placements", fileNameWithoutExt + ".txt");
-                    string fileDirectory = Path.GetDirectoryName(data.Path).Substring(2);
-                    string filePath = pathDirectory + Path.Combine(fileDirectory, fileName);
-                    if (!Directory.Exists(Path.GetDirectoryName(filePath))) {
-                        Directory.CreateDirectory(Path.GetDirectoryName(filePath));
-                    }
+                if (extractedData.Count() > 0) {
+                    foreach (EntryData data in extractedData) {
+                        string fileNameWithoutExt = Path.GetFileNameWithoutExtension(data.Path);
+                        string fileName = Path.Combine("Placements", fileNameWithoutExt + ".txt");
+                        string fileDirectory = Path.GetDirectoryName(data.Path).Substring(2);
+                        string filePath = pathDirectory + Path.Combine(fileDirectory, fileName);
+                        if (!Directory.Exists(Path.GetDirectoryName(filePath))) {
+                            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+                        }
 
-                    using (StreamWriter writer = new StreamWriter(filePath)) {
-                        writer.WriteLine(data.Ofsx);
-                        writer.WriteLine(data.Ofsy);
-                    }
+                        using (StreamWriter writer = new StreamWriter(filePath)) {
+                            writer.WriteLine(data.Ofsx);
+                            writer.WriteLine(data.Ofsy);
+                        }
 
+                    }
+                    MessageBox.Show("已在文件路径生成坐标文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Application.Exit();
                 }
-                MessageBox.Show("已在文件路径生成坐标文件", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Application.Exit();
+                else {
+                    MessageBox.Show("未找到任何可供生成的数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    Application.Exit();
+                }
             }
             else {
                 MessageBox.Show("未找到任何可供生成的数据", "错误", MessageBoxButtons.OK, MessageBoxIcon.Stop);
