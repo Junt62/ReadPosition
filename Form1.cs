@@ -19,7 +19,7 @@ namespace ReadPosition {
 
         public void Form1_Shown(object sender, EventArgs e) {
             string path = Program.CommandLineArgs;
-            //path = "C:\\Users\\Administrator\\Downloads\\top1000.txt";
+            path = "C:\\Users\\Administrator\\Downloads\\新建文本文档.txt";
             string pathDirectory = Path.GetDirectoryName(path);
 
             if (path != null) {
@@ -36,10 +36,20 @@ namespace ReadPosition {
             if (extractedData != null) {
                 if (extractedData.Count() > 0) {
                     foreach (EntryData data in extractedData) {
+
                         string fileNameWithoutExt = Path.GetFileNameWithoutExtension(data.Path);
+
                         string fileName = Path.Combine("Placements", fileNameWithoutExt + ".txt");
-                        string fileDirectory = Path.GetDirectoryName(data.Path).Substring(2);
+
+                        string fileDirectory = Path.GetDirectoryName(data.Path);
+
+                        if (Regex.IsMatch(Path.GetDirectoryName(data.Path), "^[A-Za-z]:.*$"))
+                            fileDirectory = Path.GetDirectoryName(data.Path).Substring(2);
+                        else if (!Regex.IsMatch(Path.GetDirectoryName(data.Path), "^\\.*$"))
+                            fileDirectory = "\\" + Path.GetDirectoryName(data.Path);
+
                         string filePath = pathDirectory + Path.Combine(fileDirectory, fileName);
+
                         if (!Directory.Exists(Path.GetDirectoryName(filePath))) {
                             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
                         }
