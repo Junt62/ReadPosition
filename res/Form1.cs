@@ -19,7 +19,7 @@ namespace ReadPosition {
 
         public void Form1_Shown(object sender, EventArgs e) {
             string path = Program.CommandLineArgs;
-            path = "C:\\Users\\Administrator\\Downloads\\新建文本文档.txt";
+            //path = "C:\\Users\\Administrator\\Downloads\\新建文本文档.txt";
             string pathDirectory = Path.GetDirectoryName(path);
 
             if (path != null) {
