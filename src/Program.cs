@@ -20,7 +20,7 @@ namespace ReadPosition {
                 CommandLineArgs = args[0];
             }
 
-            Application.Run(new Form1());
+            Application.Run(new MainForm());
         }
 
         public static string CommandLineArgs;

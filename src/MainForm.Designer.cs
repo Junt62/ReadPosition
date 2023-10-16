@@ -1,5 +1,5 @@
 ﻿namespace ReadPosition {
-    partial class Form1 {
+    partial class MainForm {
         /// <summary>
         /// 必需的设计器变量。
         /// </summary>
@@ -23,16 +23,16 @@
         /// 使用代码编辑器修改此方法的内容。
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SuspendLayout();
             // 
-            // Form1
+            // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(384, 261);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "读取并生成坐标文件中...";
             this.TopMost = true;
